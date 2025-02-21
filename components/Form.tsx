@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Locality } from "@/app/api/graphql/route";
+import GoogleMapComponent from "@/components/GoogleMapComponent";
+import { useState, useEffect } from "rehackt";
 
 // GraphQL Query
 const VALIDATE_ADDRESS = gql`
@@ -34,6 +36,15 @@ const formSchema = z.object({
 });
 
 export default function AddressForm() {
+    const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
+    const [validateAddress, { data, error, loading }] = useLazyQuery(VALIDATE_ADDRESS);
+    useEffect(() => {
+        if (data?.validateAddress?.length > 0) {
+            const locality = data.validateAddress[0]; // 选取第一个匹配的地址
+            setSelectedLocation({ lat: locality.latitude, lng: locality.longitude });
+        }
+    }, [data]);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -42,8 +53,6 @@ export default function AddressForm() {
             state: "NSW",
         } as const,
     });
-
-    const [validateAddress, { data, error, loading }] = useLazyQuery(VALIDATE_ADDRESS);
 
     const onSubmit = (values: { suburb: string; postcode: number; state: "NSW" | "VIC" | "QLD" | "WA" | "SA" | "TAS" }) => {
         validateAddress({
@@ -120,6 +129,16 @@ export default function AddressForm() {
                     </Button>
                 </form>
             </Form>
+            <div className="max-w-md mx-auto p-6 border rounded-lg shadow bg-white">
+                <h2 className="text-lg font-semibold mb-4">Validate Address</h2>
+
+                {selectedLocation && (
+                    <div className="mt-4">
+                        <h3 className="font-semibold text-lg">Google Maps Location:</h3>
+                        <GoogleMapComponent latitude={selectedLocation.lat} longitude={selectedLocation.lng} />
+                    </div>
+                )}
+            </div>
 
             {loading && <p>Validating...</p>}
 
