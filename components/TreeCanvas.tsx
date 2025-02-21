@@ -4,10 +4,13 @@ import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { Button } from "@/components/ui/button";
+
 
 const ThreeBackground: React.FC = () => {
+    // Add a pause button
     const mountRef = useRef<HTMLDivElement>(null);
-
+    const [isPaused, setIsPaused] = React.useState(false);
     useEffect(() => {
         if (!mountRef.current) return;
 
@@ -35,18 +38,17 @@ const ThreeBackground: React.FC = () => {
         const pointLight = new THREE.PointLight(0xffffff, 1);
         pointLight.position.set(5, 5, 5);
         scene.add(pointLight);
-
-        const models: THREE.Object3D[] = [];
+        let fontModel = new THREE.Object3D() as THREE.Object3D<THREE.Object3DEventMap> ;
 
         // Load 3D model
         const fbxLoader = new FBXLoader();
         fbxLoader.load(
             '/models/PCB.fbx',
             (object: THREE.Object3D<THREE.Object3DEventMap>) => {
-                object.position.set(0, -3, 0);
+                object.position.set(0, 2, 0);
                 object.scale.set(0.03, 0.03, 0.03);
                 object.rotation.x = -Math.PI / 2; // 绕X轴旋转90度
-                models.push(object);
+                fontModel = object;
                 scene.add(object);
             },
             (xhr: { loaded: number; total: number; }) => {
@@ -59,16 +61,17 @@ const ThreeBackground: React.FC = () => {
             }
         );
 
-        // 加载GLB模型
+        let catModel = new THREE.Object3D() as THREE.Object3D<THREE.Object3DEventMap> ;
+
+        // Load GLT 3D model
         const gltfLoader = new GLTFLoader();
         gltfLoader.load(
             '/models/smaller_cat.glb',
             (gltf) => {
                 const object = gltf.scene;
-                object.position.set(0, 2, 0);
-                object.scale.set(0.05, 0.05, 0.05);
-                object.rotation.x = -Math.PI / 2;
-                models.push(object);
+                object.position.set(0, -3, 0);
+                object.scale.set(5, 5, 5);
+                catModel = object;
                 scene.add(object);
             },
             (xhr) => {
@@ -81,15 +84,17 @@ const ThreeBackground: React.FC = () => {
 
         // Add animation
         const animate = () => {
+            if (isPaused) return;
             requestAnimationFrame(animate);
             const time = Date.now() * 0.001;
-            models.forEach((model) => {
-                if (time % 4 < 2) {
-                    model.rotation.z += 0.01;
-                } else {
-                    model.rotation.z = 0;
-                }
-            });
+            const delta = 0.5;
+            if (time % 4 < 2) {
+                fontModel.rotation.z += delta;
+                catModel.rotation.y += delta;
+            } else {
+                fontModel.rotation.z = 0;
+                catModel.rotation.y = 0;
+            }
             renderer.render(scene, camera);
         };
         animate();
@@ -109,6 +114,10 @@ const ThreeBackground: React.FC = () => {
                 currentMount.removeChild(renderer.domElement);
             }
         };
+    }, [isPaused]);
+
+    useEffect(() => {
+        
     }, []);
 
     return (
@@ -121,7 +130,19 @@ const ThreeBackground: React.FC = () => {
                 width: "100%",
                 height: "100%",
             }}
-        />
+        >
+            <Button
+                variant="outline"
+                size="lg"
+                className="absolute top-6 right-6 z-50 bg-white/90 text-black shadow-lg hover:bg-white hover:scale-105 transition-all border border-gray-300 px-6 py-3 rounded-full"
+                onClick={() => setIsPaused(!isPaused)}
+            >
+                {isPaused ? '▶ Resume Animation' : '⏸ Pause Animation'}
+            </Button>
+
+
+
+        </div>
     );
 };
 
