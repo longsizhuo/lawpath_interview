@@ -1,7 +1,7 @@
 # Address Validation Form (Next.js + Apollo + shadcn/ui + Zod + Three.js)
 
 This project provides an address validation form that verifies Australian addresses using a GraphQL proxy.
-
+Have tested it on MacOS, Windows11, and Ubuntu20.04.
 ---
 
 ## 🚀 Getting Started
@@ -68,9 +68,10 @@ Now, open http://localhost:3000 in your browser. You can start editing the page 
 
 
 ## API Settings
-To ensure the security of your API key and prevent it from being exposed in your codebase, it's essential to store it as an environment variable.
-1. Rename `.env.template` to `.env`,
-2. change the value of `API_KEY` to your own api key.
+To ensure the security of your API key and prevent it from being exposed in your codebase, it is crucial to store it as an environment variable. Follow these steps:
+1. Rename `.env.template` to `.env`, 
+2. Replace the value of `API_KEY` with your actual API key. 
+3. Optionally, add your Google Maps API key in the `.env` file. If not provided, the system will display an `ApiProjectMapError` but will continue to function.
 
 
 ### ⚠️ Common Issues & Fixes
@@ -91,4 +92,4 @@ export default function MyApp({ children }) {
 ### 📌 Improvements
 1. Optimize the animation system. Now every frame is rendered. You can use the principle of human visual retention to reduce the number of frames or use interpolation to reduce memory consumption.
 2. Add more error handling, such as network error handling.
-3. 
+3. Add music to the animation? 🎵

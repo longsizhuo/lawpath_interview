@@ -1,6 +1,9 @@
 "use client";
 
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables from .env file
 
 const containerStyle = {
     width: "100%",
