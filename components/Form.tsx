@@ -15,7 +15,7 @@ import ThreeBackground from "@/components/ThreeCanvas";
 
 // GraphQL Query
 const VALIDATE_ADDRESS = gql`
-    query ValidateAddress($suburb: String!, $postcode: Int!, $state: String!) {
+    query ValidateAddress($suburb: String!, $postcode: Int!, $state: String) {
         validateAddress(suburb: $suburb, postcode: $postcode, state: $state) {
             id
             location
@@ -32,7 +32,7 @@ const VALIDATE_ADDRESS = gql`
 const formSchema = z.object({
     suburb: z.string().min(2, "Suburb must be at least 2 characters"),
     postcode: z.number().int().positive().gte(200).lte(9729),
-    state: z.enum(["NSW", "VIC", "QLD", "WA", "SA", "TAS"]).default("NSW"),
+    state: z.enum(["", "NSW", "VIC", "QLD", "WA", "SA", "TAS"]).default(""),
 });
 
 export default function AddressForm() {
@@ -63,14 +63,16 @@ export default function AddressForm() {
         } as const,
     });
 
-    const onSubmit = (values: { suburb: string; postcode: number; state: "NSW" | "VIC" | "QLD" | "WA" | "SA" | "TAS" }) => {
-        validateAddress({
-            variables: {
-                suburb: values.suburb,
-                postcode: values.postcode,
-                state: values.state,
-            },
-        }).then(r => console.log(r));
+    const onSubmit = (values: { suburb: string; postcode: number; state: string }) => {
+        const variables: {suburb: string; postcode: number; state?: string} = {
+            suburb: values.suburb,
+            postcode: values.postcode,
+        };
+        if (values.state) {
+            variables.state = values.state;
+        }
+
+        validateAddress({ variables }).then(r => console.log(r));
     };
 
     // handle the click event of the address
@@ -139,7 +141,7 @@ export default function AddressForm() {
                                         <Label>State</Label>
                                         <FormControl>
                                             <select {...field} className="border p-2 rounded w-full">
-                                                <option value="">Select State</option>
+                                                <option value="">Not Provided</option>
                                                 <option value="NSW">New South Wales (NSW)</option>
                                                 <option value="VIC">Victoria (VIC)</option>
                                                 <option value="QLD">Queensland (QLD)</option>

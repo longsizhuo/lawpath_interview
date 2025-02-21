@@ -28,7 +28,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        validateAddress(suburb: String!, postcode: Int!, state: String!): [Locality]  # ✅ Change it to return the array
+        validateAddress(suburb: String!, postcode: Int!, state: String): [Locality]  # ✅ Change it to return the array
     }
 `;
 
@@ -44,7 +44,12 @@ const resolvers = {
                 throw new Error("API_KEY is not defined in environment variables");
             }
 
-            const response = await fetch(`${API_URL}?q=${suburb}&state=${state}`, {
+            const params = new URLSearchParams({ q: suburb });
+            if (state) {
+                params.append("state", state);
+            }
+
+            const response = await fetch(`${API_URL}?${params.toString()}`, {
                 headers: { Authorization: `Bearer ${API_KEY}` },
             });
 
