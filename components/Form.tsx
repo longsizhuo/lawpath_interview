@@ -8,8 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Locality } from "@/app/api/graphql/route";
 
-// GraphQL 查询
+// GraphQL Query
 const VALIDATE_ADDRESS = gql`
     query ValidateAddress($suburb: String!, $postcode: Int!, $state: String!) {
         validateAddress(suburb: $suburb, postcode: $postcode, state: $state) {
@@ -17,11 +18,15 @@ const VALIDATE_ADDRESS = gql`
             location
             postcode
             state
+            category
+            latitude
+            longitude
         }
     }
 `;
 
-// Zod 校验规则
+
+// Zod validation schema
 const formSchema = z.object({
     suburb: z.string().min(2, "Suburb must be at least 2 characters"),
     postcode: z.number().int().positive().gte(200).lte(9729),  // ✅ number
@@ -117,8 +122,26 @@ export default function AddressForm() {
             </Form>
 
             {loading && <p>Validating...</p>}
+
             {error && <p className="text-red-500">{error.message}</p>}
-            {data && <p className="text-green-500">✅ The address is valid!</p>}
+
+            {data?.validateAddress?.length > 0 && (
+                <div className="mt-4">
+                    <h3 className="font-semibold text-lg">Matching Addresses:</h3>
+                    <ul className="mt-2 space-y-2">
+                        {data.validateAddress.map((locality: Locality) => (
+                            <li key={locality.id} className="p-3 border rounded bg-gray-50 shadow">
+                                <p><strong>📍 Location:</strong> {locality.location}, {locality.state} ({locality.postcode})</p>
+                                <p><strong>📌 Category:</strong> {locality.category}</p>
+                                <p><strong>🌍 Coordinates:</strong> {locality.latitude}, {locality.longitude}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {data?.validateAddress?.length === 0 && <p className="text-red-500">❌ No matching address found.</p>}
+
         </div>
     );
 }
