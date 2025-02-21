@@ -144,9 +144,9 @@ export default function AddressForm() {
 
             {error && <p className="text-red-500">{error.message}</p>}
 
-            {data?.validateAddress?.length > 0 && (
+            {data?.validateAddress && data.validateAddress.length > 0 && (
                 <div className="mt-4">
-                    <h3 className="font-semibold text-lg">Matching Addresses:</h3>
+                    <h3 className="text-green-600 font-semibold">✅ The postcode, suburb, and state input are valid.</h3>
                     <ul className="mt-2 space-y-2">
                         {data.validateAddress.map((locality: Locality) => (
                             <li key={locality.id} className="p-3 border rounded bg-gray-50 shadow">
@@ -158,6 +158,7 @@ export default function AddressForm() {
                     </ul>
                 </div>
             )}
+
 
             {data?.validateAddress?.length === 0 && <p className="text-red-500">❌ No matching address found.</p>}
 
