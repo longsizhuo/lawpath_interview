@@ -53,7 +53,9 @@ const resolvers = {
             }
 
             const data = await response.json();
-            const localities = data.localities.locality;
+            const localitiesRaw = data.localities.locality;
+            const localities = Array.isArray(localitiesRaw) ? localitiesRaw : [localitiesRaw];
+
 
             if (!localities || localities.length === 0) {
                 throw new GraphQLError(`The suburb ${suburb} does not exist in the state ${state}.`);

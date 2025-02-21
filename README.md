@@ -34,6 +34,19 @@ Now, open http://localhost:3000 in your browser. You can start editing the page 
     
     If you feel animation is too noisy, you can click `Stop Animation` Button at right top to stop the animation.
 
+### 4️⃣ Introduction to the Project
+
+1. Initial Page
+![index0.png](public/index0.png)
+2. After Filling the Form, you can see multiple address for choosing.
+![index1.png](public/index1.png)
+3. After Choosing the Address, you can see the address on the map.(Thanks for Google Map API)
+![index2.png](public/index2.png)
+4. If it is not matched, you can see the error message.
+![indexError.png](public/indexError.png)
+
+
+
 ## Folder Structure
 ```text
 /app
@@ -75,10 +88,7 @@ export default function MyApp({ children }) {
 }
 ```
 
-### 📌 Notes
-
-This project uses `Next.js`, `Apollo`, `shadcn`, `Zod`, and `Three.js`.
-
-For database or backend requirements, ensure GraphQL proxy is running.
-
-UI components are managed via shadcn/ui, make sure to initialize them.
+### 📌 Improvements
+1. Optimize the animation system. Now every frame is rendered. You can use the principle of human visual retention to reduce the number of frames or use interpolation to reduce memory consumption.
+2. Add more error handling, such as network error handling.
+3. 
