@@ -28,7 +28,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        validateAddress(suburb: String!, postcode: Int!, state: String!): [Locality]  # ✅ 改成返回数组
+        validateAddress(suburb: String!, postcode: Int!, state: String!): [Locality]  # ✅ Change it to return the array
     }
 `;
 
