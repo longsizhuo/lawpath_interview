@@ -47,7 +47,7 @@ const ThreeBackground: React.FC = () => {
             (object: THREE.Object3D<THREE.Object3DEventMap>) => {
                 object.position.set(0, 2, 0);
                 object.scale.set(0.03, 0.03, 0.03);
-                object.rotation.x = -Math.PI / 2; // 绕X轴旋转90度
+                object.rotation.x = -Math.PI / 2.6;
                 fontModel = object;
                 scene.add(object);
             },

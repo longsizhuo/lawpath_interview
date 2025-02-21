@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Locality } from "@/app/api/graphql/route";
 import GoogleMapComponent from "@/components/GoogleMapComponent";
 import { useState, useEffect } from "rehackt";
-import ThreeBackground from "@/components/TreeCanvas"; // 引入 three.js 背景组件
+import ThreeBackground from "@/components/ThreeCanvas"; // 引入 three.js 背景组件
 
 // GraphQL Query
 const VALIDATE_ADDRESS = gql`

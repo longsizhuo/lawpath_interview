@@ -1,4 +1,4 @@
-# Address Validation Form (Next.js + Apollo + shadcn/ui)
+# Address Validation Form (Next.js + Apollo + shadcn/ui + Zod + Three.js)
 
 This project provides an address validation form that verifies Australian addresses using a GraphQL proxy.
 
@@ -31,6 +31,8 @@ bun dev
 ```
 
 Now, open http://localhost:3000 in your browser. You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+    
+    If you feel animation is too noisy, you can click `Stop Animation` Button at right top to stop the animation.
 
 ## Folder Structure
 ```text
@@ -41,7 +43,7 @@ Now, open http://localhost:3000 in your browser. You can start editing the page 
 /components
    │  Form.tsx # form component
    │  GoogleMapComponent.tsx # google map component
-   │  TreeCanvas.tsx # three.js component
+   │  ThreeCanvas.tsx # three.js component
    │
    └─ui # shadcn ui
 /lib
