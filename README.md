@@ -89,6 +89,10 @@ export default function MyApp({ children }) {
 }
 ```
 
+❌ Error: HTTP error! status: 504
+
+🔍 Cause: The GraphQL proxy server is currently unreachable.✅ Fix: Try it again.
+
 ### 📌 Improvements
 1. Optimize the animation system. Now every frame is rendered. You can use the principle of human visual retention to reduce the number of frames or use interpolation to reduce memory consumption.
 2. Add more error handling, such as network error handling.
