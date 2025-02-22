@@ -1,7 +1,8 @@
 # Address Validation Form (Next.js + Apollo + shadcn/ui + Zod + Three.js)
 
 This project provides an address validation form that verifies Australian addresses using a GraphQL proxy.
-Have tested it on MacOS, Windows11, and Ubuntu20.04.
+Tested on MacOS, Windows 11, and Ubuntu 20.04
+
 ---
 
 ## 🚀 Getting Started
@@ -15,7 +16,7 @@ npm install
 
 ### 2️⃣ API Settings
 To ensure the security of your API key and prevent it from being exposed in your codebase, it is crucial to store it as an environment variable. Follow these steps:
-1. Rename `.env.template` to `.env`,
+1. Rename `.env.template` to `.env`, 
 2. Replace the value of `API_KEY` with your actual API key.
 3. Optionally, add your Google Maps API key in the `.env` file. If not provided, the system will display an `ApiProjectMapError` but will continue to function.
 
@@ -32,13 +33,13 @@ bun dev
 
 Now, open http://localhost:3000 in your browser. You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
     
-    If you feel animation is too noisy, you can click `Stop Animation` Button at right top to stop the animation.
+If you feel animation is too noisy, you can click **Stop** Animation button in the top right corner.
 
 ## Introduction to the Project
 
 1. Initial Page
 ![index0.png](public/index0.png)
-2. After Filling the Form, you can see multiple address for choosing.
+2. After Filling the Form, you can see multiple addresses to choose from.
 ![index1.png](public/index1.png)
 3. After Choosing the Address, you can see the address on the map.(Thanks for Google Map API)
 ![index2.png](public/index2.png)
@@ -85,7 +86,7 @@ If you need additional components, you can install them using:
 npx shadcn@latest add <component-name>
 ```
 
-### ⚠️ Common Issues & Fixes
+### ⚠️ Issues & Fixes
 
 ❌ Error: React functionality 'useContext' is not available
 

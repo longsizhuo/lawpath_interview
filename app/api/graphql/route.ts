@@ -2,9 +2,7 @@ import { ApolloServer } from "@apollo/server";
 import {startServerAndCreateNextHandler } from "@as-integrations/next";
 import { gql } from "graphql-tag";
 import { GraphQLError } from "graphql";
-import dotenv from "dotenv";
 
-dotenv.config(); // Load environment variables from .env file
 
 export type Locality = {
     id: string;
