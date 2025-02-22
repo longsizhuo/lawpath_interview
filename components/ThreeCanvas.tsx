@@ -86,15 +86,15 @@ const ThreeBackground: React.FC = () => {
         const animate = () => {
             if (isPaused) return;
             requestAnimationFrame(animate);
-            const time = Date.now() * 0.001;
-            const delta = 0.5;
-            if (time % 4 < 2) {
-                fontModel.rotation.z += delta;
-                catModel.rotation.y += delta;
-            } else {
-                fontModel.rotation.z = 0;
-                catModel.rotation.y = 0;
-            }
+            // const time = Date.now() * 0.001;
+            const delta = 0.01;
+            // if (time % 4 < 2) {
+            fontModel.rotation.z += delta;
+            catModel.rotation.y += delta;
+            // } else {
+            //     fontModel.rotation.z = 0;
+            //     catModel.rotation.y = 0;
+            // }
             renderer.render(scene, camera);
         };
         animate();

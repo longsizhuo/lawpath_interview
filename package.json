@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ui:init": "npx shadcn@latest init -y && npx shadcn@latest add button form input label"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",

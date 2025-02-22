@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { gql, useLazyQuery } from "@apollo/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import { Locality } from "@/app/api/graphql/route";
 import GoogleMapComponent from "@/components/GoogleMapComponent";
 import { useState, useEffect } from "rehackt";
 import ThreeBackground from "@/components/ThreeCanvas";
+import formSchema from "@/components/schema/formschema";
 
 // GraphQL Query
 const VALIDATE_ADDRESS = gql`
@@ -27,13 +27,6 @@ const VALIDATE_ADDRESS = gql`
         }
     }
 `;
-
-// Zod validation schema
-const formSchema = z.object({
-    suburb: z.string().min(2, "Suburb must be at least 2 characters"),
-    postcode: z.number().int().positive().gte(200).lte(9729),
-    state: z.enum(["", "NSW", "VIC", "QLD", "WA", "SA", "TAS"]).default(""),
-});
 
 export default function AddressForm() {
     // save API response data

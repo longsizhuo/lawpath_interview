@@ -12,13 +12,17 @@ Ensure you have **Node.js 22** installed:
 nvm install 22
 npm install
 ```
-### 2️⃣ Initialize UI Components
+### 2️⃣ UI Components (Preconfigured)
 
-This project uses shadcn/ui, so initialize the UI components:
+✅ **All required UI components are already included in this repository.**  
+No additional setup is needed. You can start using `shadcn/ui` components immediately.
+
+### 🛠️ Add More UI Components
+If you need additional components, you can install them using:
 ```bash
-npx shadcn@latest init
-npx shadcn@latest add button form input label
+npx shadcn@latest add <component-name>
 ```
+
 ### 3️⃣ Run the Development Server
 ```bash
 npm run dev
