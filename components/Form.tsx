@@ -57,6 +57,9 @@ export default function AddressForm() {
     });
 
     const onSubmit = (values: { suburb: string; postcode: number; state: string }) => {
+        setAddresses([]);
+        setSelectedLocation(null);
+        setSelectedAddressMessage(null);
         const variables: {suburb: string; postcode: number; state?: string} = {
             suburb: values.suburb,
             postcode: values.postcode,
@@ -65,7 +68,8 @@ export default function AddressForm() {
             variables.state = values.state;
         }
 
-        validateAddress({ variables }).then(r => console.log(r));
+        validateAddress({ variables })
+            .catch((e) => console.error(e));
     };
 
     // handle the click event of the address
