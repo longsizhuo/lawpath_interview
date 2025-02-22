@@ -12,16 +12,12 @@ Ensure you have **Node.js 22** installed:
 nvm install 22
 npm install
 ```
-### 2️⃣ UI Components (Preconfigured)
 
-✅ **All required UI components are already included in this repository.**  
-No additional setup is needed. You can start using `shadcn/ui` components immediately.
-
-### 🛠️ Add More UI Components
-If you need additional components, you can install them using:
-```bash
-npx shadcn@latest add <component-name>
-```
+### 2️⃣ API Settings
+To ensure the security of your API key and prevent it from being exposed in your codebase, it is crucial to store it as an environment variable. Follow these steps:
+1. Rename `.env.template` to `.env`,
+2. Replace the value of `API_KEY` with your actual API key.
+3. Optionally, add your Google Maps API key in the `.env` file. If not provided, the system will display an `ApiProjectMapError` but will continue to function.
 
 ### 3️⃣ Run the Development Server
 ```bash
@@ -38,7 +34,7 @@ Now, open http://localhost:3000 in your browser. You can start editing the page 
     
     If you feel animation is too noisy, you can click `Stop Animation` Button at right top to stop the animation.
 
-### 4️⃣ Introduction to the Project
+## Introduction to the Project
 
 1. Initial Page
 ![index0.png](public/index0.png)
@@ -71,18 +67,24 @@ Now, open http://localhost:3000 in your browser. You can start editing the page 
 ```
 
 
-## API Settings
-To ensure the security of your API key and prevent it from being exposed in your codebase, it is crucial to store it as an environment variable. Follow these steps:
-1. Rename `.env.template` to `.env`, 
-2. Replace the value of `API_KEY` with your actual API key. 
-3. Optionally, add your Google Maps API key in the `.env` file. If not provided, the system will display an `ApiProjectMapError` but will continue to function.
-
 ## Testing
 1. Postman link: https://www.postman.com/universal-shuttle-215200/lawpath/collection/67b9181abb84275f124f6b2b/lawpath-appendix-b?action=share&creator=28896702
 
 2. Postman do not support export GraphQL as JSON. So I use the Postman link to share the collection as below:
 
 ![test.png](public/test.png)
+
+### UI Components (Preconfigured)
+
+✅ **All required UI components are already included in this repository.**  
+No additional setup is needed. You can start using `shadcn/ui` components immediately.
+
+### 🛠️ Add More UI Components
+If you need additional components, you can install them using:
+```bash
+npx shadcn@latest add <component-name>
+```
+
 ### ⚠️ Common Issues & Fixes
 
 ❌ Error: React functionality 'useContext' is not available
