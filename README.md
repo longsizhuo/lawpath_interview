@@ -73,7 +73,12 @@ To ensure the security of your API key and prevent it from being exposed in your
 2. Replace the value of `API_KEY` with your actual API key. 
 3. Optionally, add your Google Maps API key in the `.env` file. If not provided, the system will display an `ApiProjectMapError` but will continue to function.
 
+## Testing
+1. Postman link: https://www.postman.com/universal-shuttle-215200/lawpath/collection/67b9181abb84275f124f6b2b/lawpath-appendix-b?action=share&creator=28896702
 
+2. Postman do not support export GraphQL as JSON. So I use the Postman link to share the collection as below:
+
+![test.png](public/test.png)
 ### ⚠️ Common Issues & Fixes
 
 ❌ Error: React functionality 'useContext' is not available
